@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "SummarizeIt",
-  "version": "1.4",
+  "name": "JustSummarize",
+  "version": "1.0",
   "description": "Summarize any webpage with GPT-3 API.",
   "icons": {
     "16": "./img/icons/icon16.png",
@@ -12,6 +12,16 @@
   "permissions": [
     "storage"
   ],
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Alt+Q",
+        "windows": "Alt+Q",
+        "mac": "Alt+Q"
+      },
+      "description": "Execute summary"
+    }
+  },
   "content_scripts": [
     {
       "matches": [
