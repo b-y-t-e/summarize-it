@@ -169,7 +169,7 @@ async function requestGPTAPI(content, completions, ele) {
     // console.log('messages: ' + messages)
     const url = 'https://api.openai.com/v1/chat/completions'
     const body = {
-        model: 'gpt-4', // 'gpt-4',   'gpt-3.5-turbo'
+        model: 'gpt-3.5-turbo', // 'gpt-4',   'gpt-3.5-turbo'
         messages: messages,
         n: completions,
         stream: true,
