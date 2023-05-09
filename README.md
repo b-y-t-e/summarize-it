@@ -5,7 +5,7 @@ Summarize is a powerful and easy-to-use Chrome extension that lets you quickly o
 ## Features
 
 - Select text on web pages and summarize it using advanced language models.
-- Support for multiple languages, including English, Chinese, Spanish, and more.
+- Support for multiple languages, including English, Chinese, Spanish, Polish and more.
 - Formatted output in a bulleted list for easy reading.
 - User-friendly prompt to guide users in providing high-quality input.
 - No more than 3-5 sentences long output for concise and coherent summaries.
