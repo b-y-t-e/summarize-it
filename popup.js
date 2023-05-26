@@ -158,10 +158,10 @@ async function requestGPTAPI(content, completions, ele) {
 
     const language = document.getElementById('languages').value
     const system_content =
-        'You are a helpful assistant that can analyze text input and generate a concise and coherent summary that captures the main points of the input.'
-   // const promptTemplate = `Please summarize the following text, using ${language} only. You may include a brief introduction and conclusion if necessary. Your summary should be no more than 3-5 sentences long and should be in a list format, with each point numbered or bulleted:`
-    const promptTemplate = `Please summarize the following text, using ${language} only. Your summary should be no more than 3-5 sentences long and should be in a list format, with each point numbered or bulleted:`
-    const prompt = `${promptTemplate}\n${content}`
+        `Create a concise and brief summary of the following text, using ${language} language only.`
+    // const promptTemplate = `Please summarize the following text, using ${language} only. You may include a brief introduction and conclusion if necessary. Your summary should be no more than 3-5 sentences long and should be in a list format, with each point numbered or bulleted:`
+    const promptTemplate = `Text to process:`
+    const prompt = `${content}`
     const messages = [
         {role: 'system', content: system_content},
         {role: 'user', content: prompt},
@@ -169,7 +169,7 @@ async function requestGPTAPI(content, completions, ele) {
     // console.log('messages: ' + messages)
     const url = 'https://api.openai.com/v1/chat/completions'
     const body = {
-        model: 'gpt-3.5-turbo', // 'gpt-4',   'gpt-3.5-turbo'
+        model: 'gpt-4', // 'gpt-4',   'gpt-3.5-turbo'
         messages: messages,
         n: completions,
         stream: true,
@@ -180,6 +180,7 @@ async function requestGPTAPI(content, completions, ele) {
     }
     try {
         if (!body.stream) {
+
             const response = await fetch(url, {
                 method: 'POST',
                 headers: headers,
@@ -215,6 +216,7 @@ async function requestGPTAPI(content, completions, ele) {
                 throw new Error(error.error.message)
             }
 
+            let finalWork = '';
             let content = ''
             while (true) {
                 const {done, value} = await reader.read()
@@ -238,10 +240,19 @@ async function requestGPTAPI(content, completions, ele) {
                 }
                 const formattedContent = content.split('\n').map(wrapInXML).join('')
 
+                finalWork = formattedContent;
+
                 document.getElementById(
                     ele
                 ).innerHTML = `<ul class='response-content'>${formattedContent}</ul>`
             }
+
+           /* var text = extractContent(finalWork);
+            text = text.replaceAll().replace(/\n|\t/g, ". ");
+            alert(text);
+            let audio = new Audio('https://qmjoqchffd.execute-api.eu-west-1.amazonaws.com/dev/mp3?text=' + text); // replace with your mp3 link
+            await audio.play();*/
+
         }
         // content = res.choices[0]['message']['content']
         // format the content wrap it in a list according to new line characters and point numbers
